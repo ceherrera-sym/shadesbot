@@ -33,33 +33,32 @@ client.on('ready', () => {
 
 // Escuchar mensajes en grupos
 client.on('message', (message) => {
-    console.log(`Mensaje recibido de: ${message.from}`);
+   // console.log(`Mensaje recibido de: ${message.from}`);
 
     const personalNumber = '5214773047419@c.us';
 
     // Verificar si el mensaje es un código y si está en los datos
     if (data && data[message.body]) {
         const response = data[message.body];
-        const replyMessage = `Respuesta automática
 
-        CONDUCTOR: ${response.conductor}
-
-        AUTO 🚐: ${response.auto}
-
-        NÚMERO TELEFÓNICO📞: ${response.telefono}
-
-        GRUPO: ${response.grupo}
-
-        *TIPO DE SANGRE*🩸: ${response.tipoSangre}
-
-        CONTACTO DE EMERGENCIA 🦺: ${response.contactoEmergencia}`;
+        const replyMessage =  'Respuesta automática\n\n' 
+        
+                            + 'CONDUCTOR: ' + response.conductor + '\n\n'
+        
+                            + 'AUTO 🚐:'  + response.auto + '\n\n'
+        
+                            + 'NÚMERO TELEFÓNICO📞: ' + response.telefono + '\n\n'
+        
+                            + 'GRUPO: ' + response.grupo + '\n\n'
+        
+                            + '*TIPO DE SANGRE*🩸: ' + response.tipoSangre + '\n\n'
+        
+                            + 'CONTACTO DE EMERGENCIA 🦺:  ' + response.contactoEmergencia ;
+        
 
         client.sendMessage(message.from, replyMessage);
 
-         // También responderte directamente a ti
-         if (message.from === personalNumber) {
-            client.sendMessage(message.from, replyMessage);
-        }
+       
     }
 });
 
