@@ -33,11 +33,7 @@ client.on('ready', () => {
     console.log('Bot de WhatsApp está listo.');
 });
 
-client.on('disconnected', (reason) => {
-    console.log('Cliente desconectado:', reason);
-    // Intentar reconectar
-    client.initialize();
-});
+
 
 
 // Escuchar mensajes en grupos
