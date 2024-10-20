@@ -33,7 +33,18 @@ client.on('ready', () => {
     console.log('Bot de WhatsApp está listo.');
 });
 
+client.on('disconnected', (reason) => {
+    console.log('El cliente se desconectó. Intentando reconectar...');
+    setTimeout(() => {
+        client.initialize(); // Reintenta conectar después de un pequeño retraso
+    }, 5000); // Espera 5 segundos antes de intentar reconectar
+});
 
+
+client.on('auth_failure', (message) => {
+    console.error('Error de autenticación: ', message);
+    // Aquí podrías implementar lógica adicional para reintentar o notificar.
+});
 
 
 // Escuchar mensajes en grupos
