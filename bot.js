@@ -1,6 +1,4 @@
 const fs = require('fs');
-const port = process.env.PORT || 4000;
-
 const { Client, LocalAuth } = require('whatsapp-web.js');
 const qrcode = require('qrcode-terminal');
 
@@ -33,20 +31,6 @@ client.on('ready', () => {
     console.log('Bot de WhatsApp está listo.');
 });
 
-client.on('disconnected', (reason) => {
-    console.log('El cliente se desconectó. Intentando reconectar...');
-    setTimeout(() => {
-        client.initialize(); // Reintenta conectar después de un pequeño retraso
-    }, 5000); // Espera 5 segundos antes de intentar reconectar
-});
-
-
-client.on('auth_failure', (message) => {
-    console.error('Error de autenticación: ', message);
-    // Aquí podrías implementar lógica adicional para reintentar o notificar.
-});
-
-
 // Escuchar mensajes en grupos
 client.on('message', (message) => {
    // console.log(`Mensaje recibido de: ${message.from}`);
@@ -73,9 +57,20 @@ client.on('message', (message) => {
         
 
         client.sendMessage(message.from, replyMessage);
-
-       
     }
+});
+
+client.on('disconnected', (reason) => {
+    console.log('El cliente se desconectó. Intentando reconectar...');
+    setTimeout(() => {
+        client.initialize(); // Reintenta conectar después de un pequeño retraso
+    }, 5000); // Espera 5 segundos antes de intentar reconectar
+});
+
+
+client.on('auth_failure', (message) => {
+    console.error('Error de autenticación: ', message);
+    // Aquí podrías implementar lógica adicional para reintentar o notificar.
 });
 
 // Iniciar el cliente
